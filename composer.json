@@ -2,7 +2,10 @@
     "name": "the-horhe/api-client",
     "autoload": {
         "psr-0" : {
-            "TheHorhe\\ApiClient" : "ApiClient/"
+            "TheHorhe\\ApiClient" : "src/"
         }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
     }
 }
