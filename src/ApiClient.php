@@ -3,6 +3,8 @@
 namespace TheHorhe\ApiClient;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+use function GuzzleHttp\Psr7\try_fopen;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -13,6 +15,10 @@ use Psr\Http\Message\RequestInterface;
  */
 class ApiClient
 {
+    /**
+     * @param MethodInterface $method
+     * @return mixed
+     */
     public function executeMethod(MethodInterface $method)
     {
         $client = $this->createClient();
@@ -20,20 +26,30 @@ class ApiClient
         $request = $this->buildRequest($method);
         $response = $client->send($request);
 
-        return $method->processResponse($response);
-
-        # execute request
-        # process response
-        # handle exception
+        try {
+            $result = $method->processResponse($response);
+            return $result;
+        } catch (\Throwable $exception) {
+            $method->handleException($exception);
+        }
     }
 
     /**
+     * TODO: Method body
+     * Parameters: Get -> query / Post -> body
+     *
      * @param MethodInterface $method
      * @return RequestInterface
      */
     protected function buildRequest(MethodInterface $method)
     {
+        $request = new Request(
+            $method->getHttpMethod(),
+            sprintf('%s://%s/%s', $method->getHost(), $method->getScheme(), $method->getMethodUrl()),
+            $method->getHeaders()
+        );
 
+        return $request;
     }
 
     /**
@@ -42,13 +58,5 @@ class ApiClient
     protected function createClient()
     {
         return new Client();
-    }
-
-    /**
-     * @return RequestBuilder
-     */
-    protected function getRequestBuilder()
-    {
-        return new RequestBuilder();
     }
 }

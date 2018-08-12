@@ -2,8 +2,6 @@
 
 namespace TheHorhe\ApiClient;
 
-
-
 use Psr\Http\Message\ResponseInterface;
 
 interface MethodInterface
@@ -11,32 +9,46 @@ interface MethodInterface
     /**
      * @return array
      */
-    function getHeaders();
+    public function getHeaders();
 
     /**
      * @return array
      */
-    function getQueryParameters();
+    public function getQueryParameters();
+
+    /**
+     * GET/POST
+     *
+     * @return string
+     */
+    public function getHttpMethod();
+
+    /**
+     * http/https
+     *
+     * @return string
+     */
+    public function getScheme();
 
     /**
      * @return string
      */
-    function getHttpMethod();
+    public function getHost();
 
     /**
      * @return string
      */
-    function getUrl();
+    public function getMethodUrl();
 
     /**
      * @param ResponseInterface $response
      * @return mixed
      */
-    function processResponse(ResponseInterface $response);
+    public function processResponse(ResponseInterface $response);
 
     /**
-     * @param \Exception $exception
+     * @param \Throwable $exception
      * @return mixed
      */
-    function handleException(\Exception $exception);
+    public function handleException(\Throwable $exception);
 }
