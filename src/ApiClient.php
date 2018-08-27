@@ -24,9 +24,9 @@ class ApiClient
         $client = $this->createClient();
 
         $request = $this->buildRequest($method);
-        $response = $client->send($request);
 
         try {
+            $response = $client->send($request);
             $result = $method->processResponse($response);
             return $result;
         } catch (\Throwable $exception) {
@@ -43,9 +43,11 @@ class ApiClient
      */
     protected function buildRequest(MethodInterface $method)
     {
+        $parameters = http_build_query($method->getQueryParameters());
+
         $request = new Request(
             $method->getHttpMethod(),
-            sprintf('%s://%s/%s', $method->getHost(), $method->getScheme(), $method->getMethodUrl()),
+            sprintf('%s://%s/%s?%s', $method->getScheme(), $method->getHost(), $method->getMethodUrl(), $parameters),
             $method->getHeaders()
         );
 

@@ -49,12 +49,12 @@ class GetImages implements MethodInterface
 
     public function getMethodUrl()
     {
-        return '/api/images/get';
+        return '/api/images/getasd';
     }
 
     public function processResponse(ResponseInterface $response)
     {
-        dump($response);
+        return $response->getBody()->getContents();
     }
 
     public function handleException(\Throwable $exception)
