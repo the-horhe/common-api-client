@@ -49,7 +49,7 @@ class GetImages implements MethodInterface
 
     public function getMethodUrl()
     {
-        return '/api/images/getasd';
+        return '/api/images/get';
     }
 
     public function processResponse(ResponseInterface $response)

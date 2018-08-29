@@ -17,6 +17,11 @@ interface MethodInterface
     public function getQueryParameters();
 
     /**
+     * @return array
+     */
+    public function getPostFields();
+
+    /**
      * GET/POST
      *
      * @return string
