@@ -3,10 +3,11 @@
 namespace TheHorhe\ApiClient\Example\Cats\Method;
 
 use Psr\Http\Message\ResponseInterface;
+use TheHorhe\ApiClient\AbstractApiMethod;
 use TheHorhe\ApiClient\Example\Cats\Exception\CatException;
 use TheHorhe\ApiClient\MethodInterface;
 
-class GetImages implements MethodInterface
+class GetImages extends AbstractApiMethod
 {
     protected $resultsPerPage = 10;
 
@@ -61,5 +62,7 @@ class GetImages implements MethodInterface
     {
         throw new CatException($exception->getMessage(), $exception->getCode(), $exception);
     }
+
+
 
 }

@@ -60,4 +60,10 @@ class DummyMethod implements MethodInterface
         throw $exception;
     }
 
+    public function getPostFields()
+    {
+        return [];
+    }
+
+
 }

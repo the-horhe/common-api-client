@@ -5,51 +5,46 @@ namespace TheHorhe\ApiClient;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 
-class AbstractApiMethod implements MethodInterface
+abstract class AbstractApiMethod implements MethodInterface
 {
     public function getHeaders()
     {
-        // TODO: Implement getHeaders() method.
+        return [];
     }
 
     public function getQueryParameters()
     {
-        // TODO: Implement getQueryParameters() method.
+        return [];
     }
 
     public function getPostFields()
     {
-        // TODO: Implement getPostFields() method.
+        return [];
     }
 
     public function getHttpMethod()
     {
-        // TODO: Implement getHttpMethod() method.
+        return 'GET';
     }
 
     public function getScheme()
     {
-        // TODO: Implement getScheme() method.
+        return 'https';
     }
 
-    public function getHost()
-    {
-        // TODO: Implement getHost() method.
-    }
+    abstract public function getHost();
 
-    public function getMethodUrl()
-    {
-        // TODO: Implement getMethodUrl() method.
-    }
+
+    abstract public function getMethodUrl();
 
     public function processResponse(ResponseInterface $response)
     {
-        // TODO: Implement processResponse() method.
+        return $response;
     }
 
     public function handleException(\Throwable $exception)
     {
-        // TODO: Implement handleException() method.
+        throw $exception;
     }
 
 }
