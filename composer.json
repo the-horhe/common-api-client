@@ -1,5 +1,5 @@
 {
-    "name": "the-horhe/api-client",
+    "name": "the-horhe/common-api-client",
     "autoload": {
         "psr-4" : {
             "TheHorhe\\ApiClient\\" : "src/",
