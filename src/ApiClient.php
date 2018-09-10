@@ -26,7 +26,9 @@ class ApiClient
         $request = $this->buildRequest($method);
 
         try {
-            $response = $client->send($request);
+            $response = $client->send($request, [
+                'timeout' => $method->getTimeout()
+            ]);
             $result = $method->processResponse($response);
             return $result;
         } catch (\Throwable $exception) {

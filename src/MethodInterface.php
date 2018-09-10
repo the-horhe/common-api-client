@@ -56,4 +56,9 @@ interface MethodInterface
      * @return mixed
      */
     public function handleException(\Throwable $exception);
+
+    /**
+     * @return int
+     */
+    public function getTimeout();
 }
