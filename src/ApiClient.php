@@ -26,7 +26,9 @@ class ApiClient
         $request = $this->buildRequest($method);
 
         try {
-            $response = $client->send($request);
+            $response = $client->send($request, [
+                'timeout' => $method->getTimeout()
+            ]);
             $result = $method->processResponse($response);
             return $result;
         } catch (\Throwable $exception) {
@@ -48,7 +50,8 @@ class ApiClient
         $request = new Request(
             $method->getHttpMethod(),
             sprintf('%s://%s%s?%s', $method->getScheme(), $method->getHost(), $method->getMethodUrl(), $parameters),
-            $method->getHeaders()
+            $method->getHeaders(),
+            $method->getRawBody()
         );
 
         return $request;

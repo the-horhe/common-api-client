@@ -17,11 +17,6 @@ interface MethodInterface
     public function getQueryParameters();
 
     /**
-     * @return array
-     */
-    public function getPostFields();
-
-    /**
      * GET/POST
      *
      * @return string
@@ -56,4 +51,14 @@ interface MethodInterface
      * @return mixed
      */
     public function handleException(\Throwable $exception);
+
+    /**
+     * @return int
+     */
+    public function getTimeout();
+
+    /**
+     * @return mixed
+     */
+    public function getRawBody();
 }
