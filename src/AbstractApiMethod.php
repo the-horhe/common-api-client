@@ -17,11 +17,6 @@ abstract class AbstractApiMethod implements MethodInterface
         return [];
     }
 
-    public function getPostFields()
-    {
-        return [];
-    }
-
     public function getHttpMethod()
     {
         return 'GET';
@@ -52,4 +47,8 @@ abstract class AbstractApiMethod implements MethodInterface
         return 3;
     }
 
+    public function getRawBody()
+    {
+        return null;
+    }
 }

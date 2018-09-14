@@ -50,7 +50,8 @@ class ApiClient
         $request = new Request(
             $method->getHttpMethod(),
             sprintf('%s://%s%s?%s', $method->getScheme(), $method->getHost(), $method->getMethodUrl(), $parameters),
-            $method->getHeaders()
+            $method->getHeaders(),
+            $method->getRawBody()
         );
 
         return $request;
