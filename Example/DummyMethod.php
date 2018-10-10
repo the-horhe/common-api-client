@@ -60,9 +60,9 @@ class DummyMethod implements MethodInterface
         throw $exception;
     }
 
-    public function getPostFields()
+    public function getRawBody()
     {
-        return [];
+        return $this->parameters['raw_body'] ?? null;
     }
 
 

@@ -21,8 +21,9 @@ class ApiClient
      */
     public function executeMethod(MethodInterface $method)
     {
-        $client = $this->createClient();
+        $this->preprocessMethod($method);
 
+        $client = $this->createClient();
         $request = $this->buildRequest($method);
 
         try {
@@ -63,5 +64,15 @@ class ApiClient
     protected function createClient()
     {
         return new Client();
+    }
+
+    /**
+     * Methods allows add some common operations, e.g. add body parameter to the body of all methods executed by this client.
+     *
+     * @param MethodInterface $method
+     */
+    protected function preprocessMethod(MethodInterface $method)
+    {
+        return;
     }
 }
