@@ -15,3 +15,5 @@ TODO:
 1) Smart request building (post fields, files etc)
 2) Tests
 3) Separate package for symfony integration
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/the-horhe/common-api-client/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/the-horhe/common-api-client/?branch=master)
