@@ -11,7 +11,7 @@ You need to integrate several services with only few method used.
 ### Usage
 1. Create class that represents your method
 ~~~
-<?php declare(strict_types=1);
+<?php
 
 namespace App\Api\Cats\Method;
 
@@ -27,7 +27,7 @@ class GetImages extends AbstractApiMethod
      * GetImages constructor.
      * @param int $resultsPerPage
      */
-    public function __construct($resultsPerPage)
+    public function __construct(int $resultsPerPage)
     {
         $this->resultsPerPage = $resultsPerPage;
     }
