@@ -8,7 +8,7 @@ One API method = one class to describe and handle it
 ### Suggested use cases
 You need to integrate several services with only few method used.
 
-### Examples
+### Usage
 1. Create class that represents your method
 ~~~
 <?php declare(strict_types=1);
@@ -90,7 +90,9 @@ try {
 }
 ~~~
 
-TODO:
+For more examples see Example directory
+
+#### TODO:
 1) Smart request building (post fields, files etc)
 2) Tests
 3) Separate package for symfony integration
