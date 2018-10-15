@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use function GuzzleHttp\Psr7\try_fopen;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * TODO: ApiClientInterface
@@ -30,6 +31,9 @@ class ApiClient
             $response = $client->send($request, [
                 'timeout' => $method->getTimeout()
             ]);
+
+            $this->preprocessResponse($response);
+
             $result = $method->processResponse($response);
             return $result;
         } catch (\Throwable $exception) {
@@ -72,6 +76,16 @@ class ApiClient
      * @param MethodInterface $method
      */
     protected function preprocessMethod(MethodInterface $method)
+    {
+        return;
+    }
+
+    /**
+     * Use this to modify response before processing
+     *
+     * @param ResponseInterface $response
+     */
+    protected function preprocessResponse(ResponseInterface $response)
     {
         return;
     }
