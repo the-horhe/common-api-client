@@ -9,7 +9,86 @@ One API method = one class to describe and handle it
 You need to integrate several services with only few method used.
 
 ### Examples
-See 'Example' directory
+1. Create class that represents your method
+~~~
+<?php declare(strict_types=1);
+
+namespace App\Api\Cats\Method;
+
+use Psr\Http\Message\ResponseInterface;
+use TheHorhe\ApiClient\AbstractApiMethod;
+use TheHorhe\ApiClient\MethodInterface;
+
+class GetImages extends AbstractApiMethod
+{
+    protected $resultsPerPage = 10;
+
+    /**
+     * GetImages constructor.
+     * @param int $resultsPerPage
+     */
+    public function __construct($resultsPerPage)
+    {
+        $this->resultsPerPage = $resultsPerPage;
+    }
+
+    public function getQueryParameters()
+    {
+        return [
+            'format' => 'xml',
+            'results_per_page' => $this->resultsPerPage
+        ];
+    }
+
+    public function getHttpMethod()
+    {
+        return 'GET';
+    }
+
+    public function getScheme()
+    {
+        return 'https';
+    }
+
+    public function getHost()
+    {
+        return 'thecatapi.com';
+    }
+
+    public function getMethodUrl()
+    {
+        return '/api/images/get';
+    }
+
+    public function processResponse(ResponseInterface $response)
+    {
+        return $response->getBody()->getContents();
+    }
+
+    public function handleException(\Throwable $exception)
+    {
+        throw new \Exception($exception->getMessage(), $exception->getCode(), $exception);
+    }
+
+}
+~~~
+
+2. Use client to execute your method
+~~~
+...
+use TheHorhe\ApiClient\ApiClient;
+use App\Api\Cats\Method\GetImages;
+...
+
+$client = new ApiClient();
+$method = new GetImages(5);
+
+try {
+    $result = $client->executeMethod($method);
+} catch (\Throwable $throwable) {
+    // Process excrption
+}
+~~~
 
 TODO:
 1) Smart request building (post fields, files etc)
