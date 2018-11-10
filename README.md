@@ -6,7 +6,7 @@ Tiny-tiny guzzle wrapper that helps to painlessly integrate different API's in y
 One API method = one class to describe and handle it
 
 ### Suggested use cases
-You need to integrate several services with only few method used.
+You need to integrate several API's with only few method used.
 
 ### Usage
 1. Create class that represents your method
@@ -92,9 +92,45 @@ try {
 
 For more examples see Example directory
 
+3. Timeout, files, form-data: use getOptions() method in your api method class.
+[Guzzle docs](http://docs.guzzlephp.org/en/stable/quickstart.html#post-form-requests).
+
+For example:
+~~~
+    // Sending form fields + timeout
+    public function getOptions()
+    {
+
+        return [
+            'timeout' => 5,
+            'form_params' => [
+                'name' => 'Horhe',
+                'surname' => 'Secret ^_^'
+            ]
+        ];
+    }
+    
+    // Form with files
+    public function getOptions()
+    {
+        return [
+            'multipart' => [
+                [
+                    'name'     => 'field_name',
+                    'contents' => 'field_value'
+                ],
+                [
+                    'name'     => 'file_name',
+                    'contents' => fopen('/path/to/file', 'r')
+                ],
+            ]
+        ];
+    }
+~~~
+
 #### TODO:
-1) Smart request building (post fields, files etc)
-2) Tests
-3) Separate package for symfony integration
+1) Tests
+2) Separate package for symfony integration
+3) Guzzle middleware support
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/the-horhe/common-api-client/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/the-horhe/common-api-client/?branch=master)

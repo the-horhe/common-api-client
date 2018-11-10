@@ -53,12 +53,18 @@ interface MethodInterface
     public function handleException(\Throwable $exception);
 
     /**
-     * @return int
-     */
-    public function getTimeout();
-
-    /**
+     * Raw data, fopen resource / stream.
+     * @see http://docs.guzzlephp.org/en/stable/quickstart.html#post-form-requests
+     *
      * @return mixed
      */
-    public function getRawBody();
+    public function getBody();
+
+    /**
+     * Guzzle options. If you wont to set timeout, add cookie, form data etc - this is the place to go.
+     * @see http://docs.guzzlephp.org/en/stable/quickstart.html#post-form-requests
+     *
+     * @return array
+     */
+    public function getOptions();
 }

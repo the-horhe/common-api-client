@@ -42,13 +42,15 @@ abstract class AbstractApiMethod implements MethodInterface
         throw $exception;
     }
 
-    public function getTimeout()
-    {
-        return 3;
-    }
-
-    public function getRawBody()
+    public function getBody()
     {
         return null;
+    }
+
+    public function getOptions()
+    {
+        return [
+            'timeout' => 3
+        ];
     }
 }
