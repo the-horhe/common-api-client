@@ -26,10 +26,9 @@ class ApiClient implements ApiClientInterface
 
             return $method->processResponse($response);
         } catch (\Throwable $exception) {
-            $method->handleException($exception);
+            return $method->handleException($exception);
         }
 
-        throw new \LogicException('Something wrong in processing chain.');
     }
 
     /**
