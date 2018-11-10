@@ -63,6 +63,4 @@ class GetImages extends AbstractApiMethod
         throw new CatException($exception->getMessage(), $exception->getCode(), $exception);
     }
 
-
-
 }

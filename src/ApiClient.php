@@ -4,17 +4,10 @@ namespace TheHorhe\ApiClient;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
-use function GuzzleHttp\Psr7\try_fopen;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * TODO: ApiClientInterface
- *
- * Class ApiClient
- * @package TheHorhe\ApiClient
- */
-class ApiClient
+class ApiClient implements ApiClientInterface
 {
     /**
      * @param MethodInterface $method
@@ -28,23 +21,18 @@ class ApiClient
         $request = $this->buildRequest($method);
 
         try {
-            $response = $client->send($request, [
-                'timeout' => $method->getTimeout()
-            ]);
-
+            $response = $client->send($request, $method->getSendOptions());
             $this->preprocessResponse($response);
 
-            $result = $method->processResponse($response);
-            return $result;
+            return $method->processResponse($response);
         } catch (\Throwable $exception) {
             $method->handleException($exception);
         }
+
+        throw new \LogicException('Something wrong in processing chain.');
     }
 
     /**
-     * TODO: Method body
-     * Parameters: Get -> query / Post -> body
-     *
      * @param MethodInterface $method
      * @return RequestInterface
      */
@@ -56,7 +44,7 @@ class ApiClient
             $method->getHttpMethod(),
             sprintf('%s://%s%s?%s', $method->getScheme(), $method->getHost(), $method->getMethodUrl(), $parameters),
             $method->getHeaders(),
-            $method->getRawBody()
+            $method->getBody()
         );
 
         return $request;
@@ -74,19 +62,21 @@ class ApiClient
      * Methods allows add some common operations, e.g. add body parameter to the body of all methods executed by this client.
      *
      * @param MethodInterface $method
+     * @return void
      */
     protected function preprocessMethod(MethodInterface $method)
     {
-        return;
+
     }
 
     /**
      * Use this to modify response before processing
      *
      * @param ResponseInterface $response
+     * @return void
      */
     protected function preprocessResponse(ResponseInterface $response)
     {
-        return;
+
     }
 }

@@ -15,9 +15,9 @@ class DummyMethod implements MethodInterface
 
     protected $parameters;
 
-    public function __construct(array $parameres)
+    public function __construct(array $parameters)
     {
-        $this->parameters = $parameres;
+        $this->parameters = $parameters;
     }
 
     public function getHeaders()
@@ -60,10 +60,14 @@ class DummyMethod implements MethodInterface
         throw $exception;
     }
 
-    public function getRawBody()
+    public function getBody()
     {
-        return $this->parameters['raw_body'] ?? null;
+        return $this->parameters['body'] ?? null;
     }
 
+    public function getOptions()
+    {
+        return $this->parameters['options'] ?? null;
+    }
 
 }

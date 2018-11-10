@@ -4,5 +4,5 @@ namespace TheHorhe\ApiClient;
 
 interface ApiClientInterface
 {
-    function executeMethod();
+    public function executeMethod(MethodInterface $method);
 }
