@@ -21,7 +21,7 @@ class ApiClient implements ApiClientInterface
         $request = $this->buildRequest($method);
 
         try {
-            $response = $client->send($request, $method->getSendOptions());
+            $response = $client->send($request, $method->getOptions());
             $this->preprocessResponse($response);
 
             return $method->processResponse($response);

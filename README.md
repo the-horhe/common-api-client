@@ -95,6 +95,39 @@ For more examples see Example directory
 3. Timeout, files, form-data: use getOptions() method in your api method class.
 [Guzzle docs](http://docs.guzzlephp.org/en/stable/quickstart.html#post-form-requests).
 
+For example:
+~~~
+    // Sending form fields + timeout
+    public function getOptions()
+    {
+
+        return [
+            'timeout' => 5,
+            'form_params' => [
+                'name' => 'Horhe',
+                'surname' => 'Secret ^_^'
+            ]
+        ];
+    }
+    
+    // Form with files
+    public function getOptions()
+    {
+        return [
+            'multipart' => [
+                [
+                    'name'     => 'field_name',
+                    'contents' => 'field_value'
+                ],
+                [
+                    'name'     => 'file_name',
+                    'contents' => fopen('/path/to/file', 'r')
+                ],
+            ]
+        ];
+    }
+~~~
+
 #### TODO:
 1) Tests
 2) Separate package for symfony integration
