@@ -86,7 +86,7 @@ $method = new GetImages(5);
 try {
     $result = $client->executeMethod($method);
 } catch (\Throwable $throwable) {
-    // Process excrption
+    // Process exception
 }
 ~~~
 
