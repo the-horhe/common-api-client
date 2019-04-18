@@ -37,17 +37,26 @@ class ApiClient implements ApiClientInterface
      */
     protected function buildRequest(MethodInterface $method)
     {
-        $parameters = http_build_query($method->getQueryParameters());
-
         $request = new Request(
             $method->getHttpMethod(),
-            sprintf('%s://%s%s?%s', $method->getScheme(), $method->getHost(), $method->getMethodUrl(), $parameters),
+            sprintf('%s://%s%s?%s', $method->getScheme(), $method->getHost(), $method->getMethodUrl(), $this->buildQueryString($method->getQueryParameters()),
             $method->getHeaders(),
             $method->getBody()
         );
 
         return $request;
     }
+    
+    /**
+     * @param array $parametersArray
+     * @return string
+     */
+    protected function buildQueryString($parametersArray)
+    {
+        $query = http_build_query($parametersArray, '', '&');
+        
+        return preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query);
+    } 
 
     /**
      * @return Client
