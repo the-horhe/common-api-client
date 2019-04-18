@@ -39,7 +39,7 @@ class ApiClient implements ApiClientInterface
     {
         $request = new Request(
             $method->getHttpMethod(),
-            sprintf('%s://%s%s?%s', $method->getScheme(), $method->getHost(), $method->getMethodUrl(), $this->buildQueryString($method->getQueryParameters()),
+            sprintf('%s://%s%s?%s', $method->getScheme(), $method->getHost(), $method->getMethodUrl(), $this->buildQueryString($method->getQueryParameters())),
             $method->getHeaders(),
             $method->getBody()
         );
